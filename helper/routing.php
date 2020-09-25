@@ -56,11 +56,6 @@ if(isset($_POST['page']))
 }
 
 
-
-
-
-
-
 if(isset($_POST['add_post']))
 {
     // Util::dd($_FILES);
