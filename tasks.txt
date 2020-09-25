@@ -1,0 +1,39 @@
+User login
+Welcome user
+My post section
+Check that Database to UI is working properly
+Additional : UI EDIT
+
+Admin login
+add/Edit all
+User add/manage
+Check that Database to UI is working properly
+
+OUR FLOW
+Log in UI **
+Database Design **
+Log in **
+ 
+User and Admin can both edit and add just on datatable **
+Then at last will fit them into UI *******************
+
+
+TASKS PENDING
+
+ui cleaning
+toasters
+always authority check **
+nav link **
+sidebar collapse **
+page title **
+logged in username**
+
+additional :user image
+
+check ki is remember 1 ya 2
+if 1 toh normal
+if 2 toh ????
+
+expiry time 
+
+

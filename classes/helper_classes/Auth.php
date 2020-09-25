@@ -18,8 +18,8 @@ class Auth
     }
     public function build()
     {
-        $query = "CREATE TABLE IF NOT EXISTS {$this->table} (id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE,password VARCHAR(255) NOT NULL)";
-        return $this->database->query($query);
+    $query = "CREATE TABLE IF NOT EXISTS {$this->table} (id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT, email VARCHAR(255) NOT NULL UNIQUE, username VARCHAR(255) NOT NULL UNIQUE,password VARCHAR(255) NOT NULL)";
+    return $this->database->query($query);
     }
 
     public function create($table,$data){
