@@ -56,6 +56,10 @@ if(isset($_POST['page']))
 }
 
 
+
+
+
+
 if(isset($_POST['add_post']))
 {
     // Util::dd($_FILES);
@@ -176,6 +180,38 @@ if(isset($_POST['edit_post_data'])){
     
  }
 
+
+    
+
+if(isset($_POST['deletePost']))
+{
+    // Util::dd($_POST);
+    if(Util::verifyCSRFToken($_POST))
+    {
+        
+        $result = $di->get('post')->delete($_POST['id']);
+
+        // Util::dd($result);
+        switch($result)
+        {
+            
+            case DELETE_ERROR:
+                Session::setSession(DELETE_ERROR,"Update post Error");
+                Util::redirect("dashboard/manage-all-posts.php");
+                break;
+            case DELETE_SUCCESS:
+                Session::setSession(DELETE_SUCCESS,"Update post Success");
+                Util::redirect("dashboard/manage-all-posts.php");
+                break;
+        }
+    }else{
+        //errorpage 
+        Session::setSession("csrf","CSRF ERROR");
+        Util::redirect("manage-post.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
+
+    }
+}
+
 if(isset($_POST['editPost']))
 {
     // Util::dd($_POST);
@@ -211,37 +247,6 @@ if(isset($_POST['editPost']))
 
     }
 }
-    
-
-if(isset($_POST['deletePost']))
-{
-    // Util::dd($_POST);
-    if(Util::verifyCSRFToken($_POST))
-    {
-        
-        $result = $di->get('post')->delete($_POST['id']);
-
-        // Util::dd($result);
-        switch($result)
-        {
-            
-            case DELETE_ERROR:
-                Session::setSession(DELETE_ERROR,"Update post Error");
-                Util::redirect("dashboard/manage-all-posts.php");
-                break;
-            case DELETE_SUCCESS:
-                Session::setSession(DELETE_SUCCESS,"Update post Success");
-                Util::redirect("dashboard/manage-all-posts.php");
-                break;
-        }
-    }else{
-        //errorpage 
-        Session::setSession("csrf","CSRF ERROR");
-        Util::redirect("manage-post.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
-
-    }
-}
-
 
 
 if(isset($_POST['deleteMyPost']))
