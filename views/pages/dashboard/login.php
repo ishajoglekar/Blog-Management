@@ -8,7 +8,8 @@ if($activeToken != NULL)
   $user = $di->get('tokenHandler')->getUserFromValidToken($activeToken[0]['token']);
   $di->get('auth')->setAuthSession($user->id);  
   User::$login = true;
-  Util::redirect("posts/blog-home.php");
+  // Util::redirect("posts/blog-home.php");
+  Util::redirect("dashboard/index.php");
 }
 
 
