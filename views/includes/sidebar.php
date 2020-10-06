@@ -33,28 +33,7 @@
 
       ?>
 
-  <li class="nav-item <?=$sidebarSection=='user' ? 'active' : '';?>">
-                <a class="nav-link " href="#" 
-                data-toggle="collapse" 
-                data-target="#collapseUser" 
-                aria-expanded="true" 
-                aria-controls="collapseUser">
-                  <i class="fas fa-fw fa-users"></i>
-                  <span>Users</span>
-                </a>
-          
-                <div id="collapseUser" 
-                class="collapse  <?= $sidebarSection=='user' ? 'show' : '';?>" 
-                aria-labelledby="headingTwo" 
-                data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <a class="collapse-item <?= $sidebarSubSection=='add' && $sidebarSection=='user' ? 'active' : '';?>" 
-                        href="<?= BASEPAGES;?>dashboard/add-user.php">Add User</a>
-                    <a class="collapse-item <?= $sidebarSubSection=='manage' && $sidebarSection=='user' ? 'active' : '';?>" 
-                        href="<?= BASEPAGES;?>dashboard/manage-users.php">Manage Users</a>
-                  </div>
-                </div>
-        </li>
+  
 
       <!-- <li class="nav-item <?= $sidebarSection=='manage-users' ? 'active' : '';?>">
           <a class="nav-link" href="<?= BASEPAGES;?>dashboard/manage-users.php">
