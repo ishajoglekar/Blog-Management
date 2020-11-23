@@ -24,7 +24,6 @@ class User{
 
     public function validateData($data)
     {
-        
         $this->validator = $this->di->get('validator');
         $this->validator = $this->validator->check($data,[
             'first_name'=>[
@@ -72,7 +71,7 @@ class User{
                 'required'=>true,
                 'minlength'=>3,
                 'maxlength'=>40,
-                'stringSignIn'=>true,
+                'stringSignIn'=>true
                 
                 
 
@@ -141,7 +140,7 @@ class User{
         if(!$this->validator->fails())
         {
             
-        
+            
             try{
                 $this->database->beginTransaction();
                 $data_to_be_inserted['first_name'] = $data['first_name'];
@@ -308,12 +307,12 @@ class User{
                 if($mail->send())
                 {
                     Session::setSession('EMAIL_SENT',"email_sent");
-                   
+                    // Util::redirect("dashboard/blank.php");
                 }
                 else
                 {
                     Session::setSession('NETWORk_ERROR',"network_error");
-                  
+                    // Util::redirect("dashboard/forgot-password.php");
                 }
             }
     
@@ -430,7 +429,7 @@ BUTTONS;
     }
     public function getActiveToken($fetchMode = PDO::FETCH_ASSOC)
     {
-        $query = "SELECT * FROM tokens WHERE (is_remember = 1 OR is_remember = 2) AND  expires_at > CURRENT_TIMESTAMP";
+        $query = "SELECT * FROM tokens WHERE (is_remember = 1) AND  expires_at > CURRENT_TIMESTAMP";
         $result = $this->database->raw($query,$fetchMode);
         //Util::dd($result);
        

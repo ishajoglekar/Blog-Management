@@ -56,6 +56,7 @@ class Auth
     public function unsetAuthSession()
     {
         unset($_SESSION[$this->authSession]);
+        
     }
     public function check()
     {

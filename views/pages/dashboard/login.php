@@ -3,13 +3,13 @@ $navSection = "log-in";
 $page_title ="BLOG | LOG IN"; 
 
 $activeToken = $di->get('user')->getActiveToken();
+// Util::dd($activeToken);
 if($activeToken != NULL)
 {
   $user = $di->get('tokenHandler')->getUserFromValidToken($activeToken[0]['token']);
   $di->get('auth')->setAuthSession($user->id);  
   User::$login = true;
-  // Util::redirect("posts/blog-home.php");
-  Util::redirect("dashboard/index.php");
+  Util::redirect("posts/blog-home.php");
 }
 
 
