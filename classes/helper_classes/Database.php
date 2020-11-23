@@ -94,6 +94,7 @@ class Database{
 
     public function deletePermanently(string $table, $condition)
     {
+    
         $sql = "DELETE FROM {$table} WHERE {$condition}";
         $this->stmt = $this->pdo->prepare($sql);
         return $this->stmt->execute();
@@ -131,7 +132,7 @@ class Database{
             $columnNameString = implode(", ", $fields);
         }
         $sql = "SELECT {$columnNameString} FROM {$table} WHERE {$condition}";
-        //Util::dd($sql);
+        
         $this->stmt = $this->pdo->prepare($sql);
         
         $this->stmt->execute();
@@ -141,9 +142,14 @@ class Database{
     public function exists($table,$data)
     {
         //$data['name'=>'HT'];
+        
         $field = array_keys($data)[0];    
+        
         $data = $this->sanitize_input($data[$field]);
-        $result = $this->readData($table,[],"{$field} = '{$data[$field]}' and deleted = 0",PDO::FETCH_ASSOC);
+        // Util::dd($data);
+        $result = $this->readData($table,[],"{$field} = '{$data}' and deleted = 0",PDO::FETCH_ASSOC);
+        // Util::Dd($field);
+        // Util::dd($result);
         if(count($result) > 0)
         {
             return true;

@@ -186,7 +186,7 @@ if(isset($_POST['add_post']))
             case VALIDATION_ERROR:
                 Session::setSession('validation',"Validation Error");
                 Session::setSession('old',$_POST);
-                Session::setSession('errors',serialize($di->get('user')->getValidator()->errors()));//object mai hai ya array hai to text mai store kar sakeee!
+                Session::setSession('errors',serialize($di->get('post')->getValidator()->errors()));//object mai hai ya array hai to text mai store kar sakeee!
                 Util::redirect("dashboard/add-post.php");
                 break;
         }
@@ -208,7 +208,7 @@ if(isset($_POST['signin']))
         {
             case SIGNIN_ERROR:
                 Session::setSession(SIGNIN_ERROR,"Add user Error");
-                Util::redirect("dashboard/login.php");
+                Util::redirect("dashboard/register.php");
                 break;
             case SIGNIN_SUCCESS:
                 Session::setSession(SIGNIN_SUCCESS,"Add user Success");
@@ -228,8 +228,8 @@ if(isset($_POST['signin']))
 }
 
 
-if(isset($_POST['signin']))
-{
+// if(isset($_POST['signin']))
+// {
     
     // Util::redirect("../helper_classes/MailConfigHelper.php");
 //     if(Util::verifyCSRFToken($_POST))
@@ -280,9 +280,10 @@ if(isset($_POST['guest']))
         Util::redirect("dashboard/manage-all-posts.php");
     }
 }
+
 if(isset($_POST['resetRequest']))
 {
-    if(Util::verifyCSRFToken($_POST))
+if(Util::verifyCSRFToken($_POST))
     {
         // Util::dd("isha");
         $di->get('user')->requestPasswordReset($_POST,$di->get('mail'));

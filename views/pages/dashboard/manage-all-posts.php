@@ -1,38 +1,35 @@
-<?php require_once __DIR__."/../../../helper/init.php";
-$page_title ="BLOG | MANAGE POSTS";
+<?php require_once __DIR__ . "/../../../helper/init.php";
+$page_title = "BLOG | MANAGE POSTS";
 
-  $activeToken = $di->get('user')->getActiveToken();
-      if($activeToken != NULL)
-      {
-        $user = $di->get('tokenHandler')->getUserFromValidToken($activeToken[0]['token']);
-        //Util::dd($activeToken[0]['token']);
-        $di->get('auth')->setAuthSession($user->id);  
-  
-      }
-  else{
-    Util::redirect("dashboard/login.php");
-  }
+$activeToken = $di->get('user')->getActiveToken();
+if ($activeToken != NULL) {
+  $user = $di->get('tokenHandler')->getUserFromValidToken($activeToken[0]['token']);
+  //Util::dd($activeToken[0]['token']);
+  $di->get('auth')->setAuthSession($user->id);
+} else {
+  Util::redirect("dashboard/login.php");
+}
 ?>
-<?php require_once __DIR__."../../../includes/head-section.php";
+<?php require_once __DIR__ . "../../../includes/head-section.php";
 $navSection = "dashboard";
 $sidebarSection = "view-post";
 
 ?>
-  
+
 
 
 
 <body id="page-top">
 
-<!-- Page Wrapper -->
-<div id="wrapper">
+  <!-- Page Wrapper -->
+  <div id="wrapper">
 
-  <!-- Sidebar -->
-  <?php require_once __DIR__."../../../includes/sidebar.php";?>
+    <!-- Sidebar -->
+    <?php require_once __DIR__ . "../../../includes/sidebar.php"; ?>
 
-  <!-- End of Sidebar -->
+    <!-- End of Sidebar -->
 
-  <?php require_once __DIR__."../../../includes/navbar.php";?>
+    <?php require_once __DIR__ . "../../../includes/navbar.php"; ?>
 
 
     <!-- Content Wrapper -->
@@ -41,53 +38,53 @@ $sidebarSection = "view-post";
       <!-- Main Content -->
       <div id="content">
 
-        
 
-    <!-- Topbar -->
-    <?php require_once __DIR__."../../../includes/topbar-dashboard.php";?>
-    <!-- End of Topbar -->
+
+        <!-- Topbar -->
+        <?php require_once __DIR__ . "../../../includes/topbar-dashboard.php"; ?>
+        <!-- End of Topbar -->
 
 
         <!-- Begin Page Content -->
         <!-- Page Heading -->
         <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">View Posts</h1>
-                <div class="card shadow mb-4">
-                    <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary ">Posts</h6>
-                    </div>
-
-                    <div class="card-body">
-                        <table class="table table-bordered table-responsive" id="manage-posts">   
-                        <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Category</th>
-                                    <th>Name</th>
-                                    <th>Content</th>
-                                    <th>Image</th>
-                                    <th>Author</th>  
-                                    <th>Actions</th>                                  
-                                </tr>
-                            </thead>
-                        </table>
-                    </div>
-                </div>
-
+          <!-- Page Heading -->
+          <h1 class="h3 mb-4 text-gray-800">View Posts</h1>
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary ">Posts</h6>
             </div>
-            <!-- /.container-fluid -->
-         
+
+            <div class="card-body">
+              <table class="table table-bordered table-responsive" id="manage-posts">
+                <thead>
+                  <tr>
+                    <th>#</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Content</th>
+                    <th>Image</th>
+                    <th>Author</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+          </div>
+
+        </div>
+        <!-- /.container-fluid -->
+
       </div>
       <!-- End of Main Content -->
 
 
-<!-- Footer -->
+      <!-- Footer -->
 
-            <!-- Modal -->
+      <!-- Modal -->
 
-            <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+      <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header">
@@ -96,26 +93,26 @@ $sidebarSection = "view-post";
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
-            <form action="<?= BASEURL;?>helper/routing.php" method="POST">
+            <form action="<?= BASEURL; ?>helper/routing.php" method="POST">
               <div class="modal-body">
-                <input type="hidden" name="csrf_token" id="csrf_token" value="<?= Session::getSession('csrf_token');?>">
+                <input type="hidden" name="csrf_token" id="csrf_token" value="<?= Session::getSession('csrf_token'); ?>">
 
                 <input type="hidden" name="id" id="delete_post_id">
-              <p class="text-muted">Are you sure you want to delete?</p>
+                <p class="text-muted">Are you sure you want to delete?</p>
               </div>
-           
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="submit" class="btn btn-danger" name="deletePost">Delete changes</button>
-            </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-danger" name="deletePost">Delete changes</button>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
-<!-- End of delete modal -->
-<?php require_once __DIR__."../../../includes/footer.php";?>
-<!-- End of Footer -->
+      <!-- End of delete modal -->
+      <?php require_once __DIR__ . "../../../includes/footer.php"; ?>
+      <!-- End of Footer -->
     </div>
     <!-- End of Content Wrapper -->
 
@@ -123,16 +120,16 @@ $sidebarSection = "view-post";
   <!-- End of Page Wrapper -->
 
 
-<!-- Scroll to Top Button-->
-<a class="scroll-to-top rounded" href="#page-top">
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
     <i class="fas fa-angle-up"></i>
   </a>
-  
-  <?php require_once __DIR__."../../../includes/core-scripts.php";?>
-  
-  <?php require_once __DIR__."../../../includes/page-level/manage-posts-scripts.php";?>
-   <script src="<?=BASEASSETS?>js/pages/Post/manage-posts.js"></script>
-  
+
+  <?php require_once __DIR__ . "../../../includes/core-scripts.php"; ?>
+
+  <?php require_once __DIR__ . "../../../includes/page-level/manage-posts-scripts.php"; ?>
+  <script src="<?= BASEASSETS ?>js/pages/Post/manage-posts.js"></script>
+
 </body>
 
 </html>

@@ -59,6 +59,8 @@ class Validator
               
               $field = $item['field'];
               $value = $item['value'];
+
+                 
               
               foreach($item['rules'] as $rule=>$satisfier)
               {
@@ -87,7 +89,6 @@ class Validator
        }
        private function unique($field, $value, $satisfier)
        {
-
               return !$this->database->exists($satisfier,[$field=>$value]);
        }
        private function uniqueEdit($field, $value, $satisfier)

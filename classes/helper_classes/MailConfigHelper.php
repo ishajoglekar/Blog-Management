@@ -18,16 +18,21 @@ class MailConfigHelper
         $mail = new PHPMailer();
         // $mail->SMTPDebug = 4;
         $mail->isSMTP();
-        $mail->Host = "smtp.mailtrap.io";
+        $mail->Host = "smtp.gmail.com";
         $mail->SMTPAuth = true;
-        $mail->Username ="8617a1b22a70fb";
-        $mail->Password ="992a23fff0a7e5";
-        $mail->Port = 2525;
-        $mail->SMTPSecure = 'tls';
+        $mail->Username   = 'isha.joglekar@somaiya.edu';                  
+        $mail->Password   = 'Arch@ngels'; 
+        $mail->Port = 465;
+        $mail->SMTPSecure = 'ssl';
         $mail->isHTML(true);
         
-        $mail->setFrom("admin@sl.com","<SL>");
+        $mail->setFrom("isha.joglekar@somaiya.edu","<KJSCE>");
+        // Util::dd($mail);
         return $mail;
+
+
+       
+                
 
     }
     
