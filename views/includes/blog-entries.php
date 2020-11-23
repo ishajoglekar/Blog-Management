@@ -3,6 +3,14 @@ $totalPosts = count($posts);
 if($di->get('auth')->check()){
 $user = $di->get('auth')->user();
 $userID = (int)$user[0]['id'];
+
+$likedPosts = $di->get('post')->getLikedPosts($userID,PDO::FETCH_ASSOC);
+$likedPostsArr = array();
+foreach($likedPosts as $l){
+    array_push($likedPostsArr,(int)$l['post_id']);
+}
+
+// Util::dd($likedPosts);
 }
 //Util::dd($user);
 ?>
@@ -32,7 +40,9 @@ $userID = (int)$user[0]['id'];
     color: black
 }
 
-
+.red{
+  color: red!important;
+}
 
  </style>       
         
@@ -66,7 +76,9 @@ $userID = (int)$user[0]['id'];
                   Util::redirect("dashboard/404.php");
                }
 
-        foreach($totalPosts as $post): ?>
+        foreach($totalPosts as $post): 
+        // Util::Dd(in_array(85,$likedPostsArr));
+        ?>
         <!-- Blog Post -->
         <div class="card mb-4">
           <img class="card-img-top" src="<?=BASEASSETS?>images/posts/<?=$post['post_image']?>" alt="Card image cap">
@@ -87,6 +99,7 @@ $userID = (int)$user[0]['id'];
                <?php endif; endif; ?>
           </div>
           <div class="card-footer text-muted">
+            <i class="<?php if(in_array((int)$post['id'],$likedPostsArr)){ echo('red');}else{echo('');}?> fa fa-heart" style="font-size:1.3rem;margin-right:1rem" id="like"></i>
             Posted on <?=$post['created_at']?> by
             <a href=""><?= $post['author'];?></a>
           </div>

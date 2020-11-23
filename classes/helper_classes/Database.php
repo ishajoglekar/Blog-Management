@@ -52,8 +52,7 @@ class Database{
         }
     }
     public function query($sql)
-    {
-        
+    {     
         return $this->pdo->query($sql);
     }
     public function raw($sql,$mode = PDO::FETCH_OBJ)
@@ -143,7 +142,10 @@ class Database{
         //$data['name'=>'HT'];
         $field = array_keys($data)[0];    
         $data = $this->sanitize_input($data[$field]);
+
+        
         $result = $this->readData($table,[],"{$field} = '{$data[$field]}' and deleted = 0",PDO::FETCH_ASSOC);
+        // Util::dd($result);
         if(count($result) > 0)
         {
             return true;

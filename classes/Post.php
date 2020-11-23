@@ -167,21 +167,21 @@ class POST{
 
     public function getPostByID($id, $fetchMode = PDO::FETCH_OBJ)
     {
-        $query = "SELECT * FROM {$this->table} WHERE id = {$id} AND deleted = 0";
+        $query = "SELECT * FROM {$this->table} WHERE id = {$id} AND posts.deleted = 0";
         $result = $this->database->raw($query,$fetchMode);
         // Util:dd($result);
         return $result;
     }
     public function getPosts($fetchMode = PDO::FETCH_OBJ)
     {
-        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and deleted = 0;";
+        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0;";
 
         $result = $this->database->raw($query,$fetchMode);
         return $result;
     }
     public function getPostsByLimit($start, $recordNo, $fetchMode = PDO::FETCH_OBJ)
     {
-        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and deleted = 0 LIMIT {$start},{$recordNo};";
+        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0 LIMIT {$start},{$recordNo};";
 
         $result = $this->database->raw($query,$fetchMode);
        // Util::dd($result);
@@ -190,7 +190,7 @@ class POST{
     public function getIDByPostName($name, $fetchMode = PDO::FETCH_OBJ)
     {
        $name = $this->database->sanitize_input($name);
-        $query = "SELECT id FROM {$this->table} WHERE name = '{$name}' AND deleted = 0";
+        $query = "SELECT id FROM {$this->table} WHERE name = '{$name}' AND posts.deleted = 0";
         // Util::Dd("isha");
         $result = $this->database->raw($query,$fetchMode);
         //Util::dd($result);
@@ -261,14 +261,14 @@ class POST{
         
         
         $columns = ['id', 'name','content','post_image'];
-       $query = "SELECT posts.id,posts.name, posts.content,posts.post_image, category.category_name from {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and deleted = 0 and posts.id in(select users_posts.post_id from users_posts where users_posts.user_id = {$id})";
+       $query = "SELECT posts.id,posts.name, posts.content,posts.post_image, category.category_name from {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0 and posts.id in(select users_posts.post_id from users_posts where users_posts.user_id = {$id})";
 
       
         
        
 
-        $totalRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and deleted = 0 and posts.id in(select users_posts.post_id from users_posts where users_posts.user_id = {$id})";
-        $filteredRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and deleted = 0 and posts.id in(select users_posts.post_id from users_posts where users_posts.user_id = {$id})";
+        $totalRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0 and posts.id in (select users_posts.post_id from users_posts where users_posts.user_id = {$id})";
+        $filteredRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0 and posts.id in(select users_posts.post_id from users_posts where users_posts.user_id = {$id})";
 
 
         if($search_parameter != null)
@@ -346,18 +346,25 @@ BUTTONS;
     echo json_encode($output);
     }
 
+    public function getLikedPosts($id,$fetchMode = PDO::FETCH_OBJ){
+        $query = "SELECT post_id FROM users_posts WHERE user_id = ".$id." and liked=1";
+        $result = $this->database->raw($query,$fetchMode);
+        //Util::dd($result);
+        return $result;
+    }
+
 
     public function getJSONDataForDataTable($draw,$search_parameter,$order_by,$start,$length)
     {
         // Util::dd("chalna bc");
         
         $columns = ['id', 'name','content','post_image','author'];
-       $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and deleted = 0";
+       $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0";
         
        
 
-        $totalRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id AND deleted = 0";
-        $filteredRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id AND deleted = 0";
+        $totalRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id AND posts.deleted = 0";
+        $filteredRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id AND posts.deleted = 0";
 
         if($search_parameter != null)
         {

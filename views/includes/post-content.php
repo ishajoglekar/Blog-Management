@@ -27,6 +27,8 @@ $category_name = $di->get('post')->getCategoryByID($post[0]['category_id'],PDO::
         <hr>
 
       <div><?=$post[0]['content']?></div>
+
+      
       
         <hr>
 

@@ -56,6 +56,30 @@
                 </div>
         </li>
 
+
+        <li class="nav-item <?=$sidebarSection=='category' ? 'active' : '';?>">
+                <a class="nav-link " href="#" 
+                data-toggle="collapse" 
+                data-target="#collapseCategory" 
+                aria-expanded="true" 
+                aria-controls="collapseCategory">
+                  <i class="fas fa-fw fa-user"></i>
+                  <span>Categories</span>
+                </a>
+          
+                <div id="collapseCategory" 
+                class="collapse  <?= $sidebarSection=='category' ? 'show' : '';?>" 
+                aria-labelledby="headingTwo" 
+                data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <a class="collapse-item <?= $sidebarSubSection=='add' && $sidebarSection=='category' ? 'active' : '';?>" 
+                        href="<?= BASEPAGES;?>dashboard/add-category.php">Add Category</a>
+                    <a class="collapse-item <?= $sidebarSubSection=='manage' && $sidebarSection=='category' ? 'active' : '';?>" 
+                        href="<?= BASEPAGES;?>dashboard/manage-categories.php">Manage Categories</a>
+                  </div>
+                </div>
+        </li>
+
       <!-- <li class="nav-item <?= $sidebarSection=='manage-users' ? 'active' : '';?>">
           <a class="nav-link" href="<?= BASEPAGES;?>dashboard/manage-users.php">
               <i class="fas fa-fw fa-users"></i>

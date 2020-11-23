@@ -18,7 +18,7 @@ color:#fff;
         <div class="logo  rotate-n-15">
           <i class="fas fa-laugh-wink"></i>
         </div>
-        <div class="white mx-2">Blogger's Area</div>
+        <div class="white mx-2">Pen it!</div>
       
 
     <hr class="sidebar-divider my-0">
@@ -32,10 +32,18 @@ color:#fff;
               <span class="sr-only">(current)</span>
             </a>
           </li>
-        
+
+      
           
           
           <?php if($di->get('auth')->check()):?>
+
+            <li class="nav-item <?= $navSection=='likedposts' ? 'active' : '';?>">
+            <a class="nav-link" href="<?=BASEPAGES?>posts/blog-home.php">Liked Posts
+              <span class="sr-only">(current)</span>
+            </a>
+          </li>
+        
           <li class="nav-item <?= $navSection=='dashboard' ? 'active' : '';?>">
             <a class="nav-link" href="<?=BASEPAGES?>dashboard/index.php">Dashboard
               <span class="sr-only">(current)</span>

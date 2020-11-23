@@ -15,5 +15,6 @@ require_once "{$app}/../classes/helper_classes/MailConfigHelper.php";
 
 require_once "{$app}/../classes/User.php";
 require_once "{$app}/../classes/Post.php";
+require_once "{$app}/../classes/Category.php";
 // require_once "{$app}/../classes/AdminPost.php";
 

@@ -35,14 +35,8 @@ var TableDatatables = function(){
             var id = $(this).data('id');
             console.log(id);
             $("#delete_post_id").val(id);
-        }); 
-    
-        
-         
-    }
-
-    
-   
+        });     
+    }   
     return{
         //main function to handle all the datatables
 

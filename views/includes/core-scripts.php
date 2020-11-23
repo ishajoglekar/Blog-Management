@@ -4,6 +4,7 @@
 
   <!-- Core plugin JavaScript-->
   <script src="<?=BASEASSETS?>vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="<?=BASEASSETS?>js/pages/Post/liked-posts.js"></script>
 
   <!-- Custom scripts for all pages-->
 
