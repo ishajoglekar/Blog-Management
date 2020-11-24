@@ -37,6 +37,9 @@ if(isset($_POST['page']))
     elseif($_POST['page'] == 'manage-all-users')
     {
         $dependency = 'user';
+    } elseif($_POST['page'] == 'manage-categories')
+    {
+        $dependency = 'category';
     }
     elseif($_POST['page'] == "session-delete")
     {
@@ -85,6 +88,34 @@ if(isset($_POST['add_user']))
     }
 }
 
+if(isset($_POST['add_category']))
+{
+    // Util::dd("hey");
+    if(Util::verifyCSRFToken($_POST))
+    {
+        $result = $di->get('category')->addCategory($_POST);
+        
+        switch($result)
+        {
+            case ADD_ERROR:
+                Session::setSession(ADD_ERROR,"Add user Error");
+                Util::redirect("dashboard/add-category.php");
+                break;
+            case ADD_SUCCESS:
+                Session::setSession(ADD_SUCCESS,"Add user Success");
+                Util::redirect("dashboard/manage-categories.php");
+                break;
+            case VALIDATION_ERROR:
+                Session::setSession('validation',"Validation Error");
+                Session::setSession('old',$_POST);
+                Session::setSession('errors',serialize($di->get('user')->getValidator()->errors()));//object mai hai ya array hai to text mai store kar sakeee!
+                Util::redirect("dashboard/add-category.php");
+                break;
+        }
+        
+      
+    }
+}
 
 if(isset($_POST['editUser']))
 {
@@ -98,11 +129,11 @@ if(isset($_POST['editUser']))
         switch($result)
         {
             case UPDATE_ERROR:
-                Session::setSession(UPDATE_ERROR,"Update Category Error");
+                Session::setSession(UPDATE_ERROR,"Update User Error");
                 Util::redirect("dashboard/edit-users.php?id=".$_POST['edit_post_id']);
                 break;
             case UPDATE_SUCCESS:
-                Session::setSession(UPDATE_SUCCESS,"Update Category Success");
+                Session::setSession(UPDATE_SUCCESS,"Update User Success");
                 Util::redirect("dashboard/manage-users.php");
                 break;
             case VALIDATION_ERROR:
@@ -119,6 +150,41 @@ if(isset($_POST['editUser']))
 
     }
 }
+
+if(isset($_POST['editCategory']))
+{
+    // Util::dd($_POST);
+    if(Util::verifyCSRFToken($_POST))
+    {
+        
+        $result = $di->get('category')->update($_POST,$_POST['edit_category_id']);
+
+        
+        switch($result)
+        {
+            case UPDATE_ERROR:
+                Session::setSession(UPDATE_ERROR,"Update Category Error");
+                Util::redirect("dashboard/edit-category.php?id=".$_POST['edit_post_id']);
+                break;
+            case UPDATE_SUCCESS:
+                Session::setSession(UPDATE_SUCCESS,"Update Category Success");
+                Util::redirect("dashboard/manage-categories.php");
+                break;
+            case VALIDATION_ERROR:
+                Session::setSession('validation',"Validation Error");
+                Session::setSession('old',$_POST);
+                Session::setSession('errors',serialize($di->get('user')->getValidator()->errors()));//object mai hai ya array hai to text mai store kar sakeee!
+                Util::redirect("dashboard/edit-category.php?id=".$_POST['edit_post_id']);
+                break;
+        }
+    }else{
+        //errorpage 
+        Session::setSession("csrf","CSRF ERROR");
+        Util::redirect("dashboard/manage-users.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
+
+    }
+}
+
 
 if(isset($_POST['add_user_by_admin']))
 {
@@ -268,6 +334,12 @@ if(isset($_POST['edit_post_data'])){
      
     Util::redirect('/dashboard/edit-user.php?id='.$_POST['user_id']);
     
+ }else if(isset($_POST['edit_category_data'])){
+    
+    // Util::dd($_POST['category_id']);
+     
+    Util::redirect('/dashboard/edit-category.php?id='.$_POST['category_id']);
+    
  }
 
 if(isset($_POST['editPost']))
@@ -391,6 +463,36 @@ if(isset($_POST['deleteMyPost']))
         //errorpage 
         Session::setSession("csrf","CSRF ERROR");
         Util::redirect("manage-post.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
+
+    }
+}
+
+if(isset($_POST['deleteCategory']))
+{
+    // Util::dd($_POST);
+    if(Util::verifyCSRFToken($_POST))
+    {
+        // Util::dd($_POST);
+        
+        $result = $di->get('category')->delete($_POST['id']);
+
+        // Util::dd($result);
+        switch($result)
+        {
+            
+            case DELETE_ERROR:
+                Session::setSession(DELETE_ERROR,"Update post Error");
+                Util::redirect("dashboard/manage-categories.php");
+                break;
+            case DELETE_SUCCESS:
+                Session::setSession(DELETE_SUCCESS,"Update post Success");
+                Util::redirect("dashboard/manage-categories.php");
+                break;
+        }
+    }else{
+        //errorpage 
+        Session::setSession("csrf","CSRF ERROR");
+        Util::redirect("manage-categories.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
 
     }
 }

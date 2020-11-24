@@ -25,6 +25,7 @@ $di->get('tokenHandler')->build();
 
 $di->set('user',new User($di));
 $di->set('post',new Post($di));
+$di->set('category',new Category($di));
 // $di->set('adminPost',new Post($di));
 
 if(isset($_COOKIE['token']) && $di->get('tokenHandler')->isValid($_COOKIE['token'],1))
