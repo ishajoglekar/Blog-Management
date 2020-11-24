@@ -94,8 +94,7 @@ class POST{
         
         //INSERT DATA IN DATABASE
         if(!$this->validator->fails())
-        { 
-            
+        {
             
             try{
                 $this->database->beginTransaction();
@@ -110,7 +109,6 @@ class POST{
       
                 if(isset($_FILES['post_image']))
                 {
-                    
                     $file_name = $_FILES['post_image']['name'];
                     $file_tmp = $_FILES['post_image']['tmp_name'];
             

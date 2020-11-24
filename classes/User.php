@@ -429,7 +429,7 @@ BUTTONS;
     }
     public function getActiveToken($fetchMode = PDO::FETCH_ASSOC)
     {
-        $query = "SELECT * FROM tokens WHERE (is_remember = 1 OR is_remember = 2) AND  expires_at > CURRENT_TIMESTAMP";
+        $query = "SELECT * FROM tokens WHERE (is_remember = 1) AND  expires_at > CURRENT_TIMESTAMP";
         $result = $this->database->raw($query,$fetchMode);
         //Util::dd($result);
        
