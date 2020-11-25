@@ -174,9 +174,20 @@ class POST{
     }
     public function getPosts($fetchMode = PDO::FETCH_OBJ)
     {
-        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0;";
+        $query = "SELECT posts.id as post_id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0;";
 
         $result = $this->database->raw($query,$fetchMode);
+        return $result;
+    }
+
+    public function getLikedPosts($id,$fetchMode = PDO::FETCH_ASSOC)
+    {
+        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM(((posts INNER JOIN users_posts on posts.id = users_posts.post_id) INNER JOIN users on users_posts.user_id = users.id) INNER JOIN users_category on users.id = users_category.user_id and users.id = ".$id.")INNER JOIN category on users_category.category_id = category.id group by(posts.name)";
+
+        // Util::dd($query);
+        $result = $this->database->raw($query,$fetchMode);
+        // Util::Dd("hi");
+        // Util::Dd(count($result));
         return $result;
     }
     public function getPostsByLimit($start, $recordNo, $fetchMode = PDO::FETCH_OBJ)
@@ -346,13 +357,6 @@ BUTTONS;
     echo json_encode($output);
     }
 
-    public function getLikedPosts($id,$fetchMode = PDO::FETCH_OBJ){
-        $query = "SELECT post_id FROM users_posts WHERE user_id = ".$id." and liked=1";
-        $result = $this->database->raw($query,$fetchMode);
-        //Util::dd($result);
-        return $result;
-    }
-
 
     public function getJSONDataForDataTable($draw,$search_parameter,$order_by,$start,$length)
     {
@@ -463,6 +467,21 @@ BUTTONS;
 
     public function likeunlike(){
         Util::dd("hii");
+    }
+
+    public function syncFavs($favArr,$user){
+        try{
+            $this->database->beginTransaction();
+            $this->database->syncFavs('users_category',$favArr,$user);
+            // Util::Dd("Hi")
+            // $this->database->delete($this->address,"id={$id}");
+            // $this->database->deletePermanently($this->users_posts,"post_id={$id}");
+            $this->database->commit();
+            return DELETE_SUCCESS;
+        }catch(Exception $e){
+            $this->database->rollBack();
+            return DELETE_ERROR;
+        }
     }
 
 }

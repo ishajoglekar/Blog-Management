@@ -498,4 +498,44 @@ if(isset($_POST['deleteCategory']))
 }
 
 
+
+if(isset($_POST['favs']))
+{
+    
+    if(Session::getSession('csrf_token') == $_POST['csrf_token'])
+    {
+        
+        $favArr = array();
+        foreach(array_keys($_POST) as $i){
+            // Util::dd(($i!= 'csrf_token'));
+            if($i!='favs' && $i!='csrf_token')
+               array_push($favArr,(int)$di->get('category')->getCategoryIDByName($i)[0]['id']);
+        }
+
+        // Util::Dd($favArr);
+        
+        $result = $di->get('post')->syncFavs($favArr,$di->get('auth')->user());
+
+        // Util::dd($result);
+        switch($result)
+        {
+            
+            case DELETE_ERROR:
+                Session::setSession(DELETE_ERROR,"Update post Error");
+                Util::redirect("posts/blog-home.php");
+                break;
+            case DELETE_SUCCESS:
+                Session::setSession(DELETE_SUCCESS,"Update post Success");
+                Util::redirect("posts/blog-home.php");
+                break;
+        }
+    }else{
+        //errorpage 
+        Session::setSession("csrf","CSRF ERROR");
+        Util::redirect("posts/blog-home.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
+
+    }
+}
+
+
 ?>

@@ -218,4 +218,29 @@ BUTTONS;
         // Util:dd($result);
         return $result;
     }
+
+    public function getCategories($fetchMode = PDO::FETCH_OBJ)
+    {
+        $query = "SELECT category_name FROM {$this->table} where deleted = 0";
+        $result = $this->database->raw($query,$fetchMode);
+        // Util:dd($result);
+        return $result;
+    }
+
+    public function getLikedCategories($id,$fetchMode = PDO::FETCH_OBJ)
+    {
+        $query = "SELECT category_name FROM {$this->table} where category.id in(select users_category.category_id from users_category where user_id =$id) and deleted = 0";
+        $result = $this->database->raw($query,$fetchMode);
+        // Util:dd($result);
+        return $result;
+    }
+
+    public function getCategoryIDByName($i,$fetchMode=PDO::FETCH_ASSOC) {
+        $query = "SELECT id FROM category where category_name = '$i' and deleted = 0";
+        $result = $this->database->raw($query,$fetchMode);
+        // Util::dd($result);
+        return $result;
+    }
 }
+
+

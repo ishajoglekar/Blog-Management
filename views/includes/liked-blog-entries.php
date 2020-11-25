@@ -1,18 +1,15 @@
-<?php $posts = $di->get('post')->getPosts(PDO::FETCH_ASSOC);
-$totalPosts = count($posts);
+<?php
+error_reporting(E_ERROR | E_PARSE);
+ 
+// Util::dd($posts);
 if ($di->get('auth')->check()) {
   $user = $di->get('auth')->user();
   $userID = (int)$user[0]['id'];
-
-  // $likedPosts = $di->get('post')->getPosts($userID, PDO::FETCH_ASSOC);
-  // $likedPostsArr = array();
-  // foreach ($likedPosts as $l) {
-  //   array_push($likedPostsArr, (int)$l['post_id']);
-  // }
-
-  // Util::dd($likedPosts);
 }
-//Util::dd($user);
+
+$posts = $di->get('post')->getLikedPosts($userID,PDO::FETCH_ASSOC);
+$totalPosts = count($posts);
+
 ?>
 <div class="col-md-8">
   <style>
@@ -71,13 +68,13 @@ if ($di->get('auth')->check()) {
   }
 
   $totalPosts = ($di->get('post')->getPostsByLimit($start, $no_of_records_per_page, PDO::FETCH_ASSOC));
-  //Util::dd($totalPosts);
+  // Util::dd($totalPosts);
   //$totalFinalPosts = count($totalPosts);
   if (!$totalPosts) {
     Util::redirect("dashboard/404.php");
   }
 
-  foreach ($totalPosts as $post) :
+  foreach ($posts as $post) :
     // Util::Dd(in_array(85,$likedPostsArr));
   ?>
     <!-- Blog Post -->
