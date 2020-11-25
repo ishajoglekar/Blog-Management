@@ -78,6 +78,7 @@ class Auth
         return $user;
     }
 
+
     public function getUserByEmail(string $email)
     {
         return $this->database->table($this->table)->where("email","=" ,$email)->first();

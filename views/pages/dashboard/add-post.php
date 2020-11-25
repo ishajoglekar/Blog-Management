@@ -187,6 +187,7 @@ $navSection = "dashboard";
                                     id="content"  
                                     placeholder="Enter Content"
                                     rows = "10"
+                                    
                                   ><?= $old != '' ?$old['content']: '';?></textarea>
 
                                   <?php 
