@@ -176,13 +176,16 @@ class POST{
     {
         $query = "SELECT posts.id as post_id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM {$this->table} INNER JOIN {$this->category_table} ON posts.category_id = category.id and posts.deleted = 0;";
 
+
+        // SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM(((posts INNER JOIN users_posts on posts.id = users_posts.post_id) INNER JOIN users on users_posts.user_id = users.id) INNER JOIN users_category on users.id = users_category.user_id and users.id = 3)INNER JOIN category on users_category.category_id = category.id
+
         $result = $this->database->raw($query,$fetchMode);
         return $result;
     }
 
     public function getLikedPosts($id,$fetchMode = PDO::FETCH_ASSOC)
     {
-        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM(((posts INNER JOIN users_posts on posts.id = users_posts.post_id) INNER JOIN users on users_posts.user_id = users.id) INNER JOIN users_category on users.id = users_category.user_id and users.id = ".$id.")INNER JOIN category on users_category.category_id = category.id group by(posts.name)";
+        $query = "SELECT posts.id,posts.name, posts.content, posts.author,posts.post_image, posts.created_at, category.category_name FROM(posts INNER JOIN category on posts.category_id = category.id) WHERE category_id in( select users_category.category_id from users_category where user_id = $id)";
 
         // Util::dd($query);
         $result = $this->database->raw($query,$fetchMode);

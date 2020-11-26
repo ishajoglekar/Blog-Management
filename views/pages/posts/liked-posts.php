@@ -1,8 +1,9 @@
 <?php require_once __DIR__ . "/../../../helper/init.php";
 $navSection = "home";
 $page_title = "BLOG | BLOG HOME";
-
 $activeToken = $di->get('user')->getActiveToken();
+$user = $di->get('auth')->user();
+// Util::Dd($user[0]['id']);
 if ($activeToken != NULL) {
   $user = $di->get('tokenHandler')->getUserFromValidToken($activeToken[0]['token']);
   $di->get('auth')->setAuthSession($user->id);
