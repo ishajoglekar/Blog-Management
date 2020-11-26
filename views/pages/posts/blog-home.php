@@ -20,13 +20,12 @@ foreach ($favCat as $f) {
 <?php require_once __DIR__ . "../../../includes/head-section.php"; ?>
 
 <body>
-
   <!-- Navigation -->
   <?php require_once __DIR__ . "../../../includes/navbar.php"; ?>
 
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row">
 
@@ -35,7 +34,7 @@ foreach ($favCat as $f) {
 
 
       <!-- Sidebar Widgets Column -->
-      <?php require_once __DIR__ . "../../../includes/sidebar-widget.php"; ?>
+      
 
 
     </div>

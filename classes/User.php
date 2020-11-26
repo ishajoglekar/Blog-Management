@@ -407,6 +407,13 @@ BUTTONS;
         $result = $this->database->raw($query,$fetchMode);
         return $result;
     }
+
+    public function getUsers($fetchMode = PDO::FETCH_OBJ)
+    {
+        $query = "SELECT * FROM {$this->table} where deleted = 0";
+        $result = $this->database->raw($query,$fetchMode);
+        return $result;
+    }
     public function getUserByUsername($name, $fetchMode = PDO::FETCH_ASSOC)
     {
         $query = "SELECT * FROM {$this->table} WHERE (username = '{$name}' OR email = '{$name}') AND deleted = 0";

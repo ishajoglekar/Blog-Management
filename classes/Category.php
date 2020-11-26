@@ -94,7 +94,7 @@ class Category{
 
     //    $query = "SELECT users.id,concat(users.first_name,\"  \",users.last_name) as name,users.username,users.email,users.authority from users where deleted=0";
     
-        $query = "SELECT * from category";
+        $query = "SELECT * from category where deleted=0";
 
         $totalRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table}";
         $filteredRowCountQuery = "SELECT COUNT(*) as total_count FROM {$this->table}";
@@ -215,7 +215,7 @@ BUTTONS;
     {
         $query = "SELECT * FROM {$this->table} WHERE id = {$id} AND deleted = 0";
         $result = $this->database->raw($query,$fetchMode);
-        // Util:dd($result);
+        // Util::dd($result);
         return $result;
     }
 

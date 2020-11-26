@@ -11,7 +11,8 @@ $posts = $di->get('post')->getLikedPosts($userID,PDO::FETCH_ASSOC);
 $totalPosts = count($posts);
 
 ?>
-<div class="col-md-8">
+<div class="col-md-1"></div>
+<div class="col-md-7">
   <style>
     .waves-effect {
       position: relative;
@@ -142,3 +143,26 @@ $totalPosts = count($posts);
 
 
 </div>
+
+<div class="col-md-3 mt-5 p2 border">
+    <h5 class="my-4 text-center text-primary">All Bloggers</h5>
+    <p class="my-4 text-center text-success">Get in touch with your fellow bloggers!</p>
+
+    <?php
+      $users = $di->get('user')->getUsers(PDO::FETCH_ASSOC);
+      // Util::Dd($users);
+    ?>
+    <ul class="p-0">
+      <?php
+        foreach($users as $user){
+      ?>
+
+          <li style="margin:1rem"><a href="https://mail.google.com/mail/?view=cm&fs=1&to=<?=$user['email']?>" target="_blank"><?=$user['username']?></a></li>
+          <div class="border"></div>
+      <?php
+        }
+      ?>
+    </ul>
+</div>
+
+<div class="col-md-1"></div>

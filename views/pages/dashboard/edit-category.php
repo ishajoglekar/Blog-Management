@@ -1,8 +1,8 @@
 <?php require_once __DIR__ . "/../../../helper/init.php";
 
-$page_title = "BLOG | EDIT USER";
+$page_title = "BLOG | EDIT CATEGORY";
 $navSection = "dashboard";
-$sidebarSection = 'user';
+$sidebarSection = 'category';
 $sidebarSubSection = 'edit';
 
 
@@ -29,6 +29,7 @@ if (Session::hasSession('errors')) {
 $category_id = $_GET['id'];
 
 $user_details = $di->get('category')->getCategoryByID($category_id,PDO::FETCH_ASSOC);
+// Util::Dd($user_details);
 ?>
 
 <?php require_once __DIR__ . "../../../includes/head-section.php"; ?>

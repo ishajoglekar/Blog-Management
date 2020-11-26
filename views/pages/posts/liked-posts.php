@@ -1,5 +1,5 @@
 <?php require_once __DIR__ . "/../../../helper/init.php";
-$navSection = "home";
+$navSection = "liked-posts";
 $page_title = "BLOG | BLOG HOME";
 $activeToken = $di->get('user')->getActiveToken();
 $user = $di->get('auth')->user();
@@ -27,7 +27,7 @@ foreach ($favCat as $f) {
 
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row">
 
@@ -35,8 +35,7 @@ foreach ($favCat as $f) {
       <?php require_once __DIR__ . "../../../includes/liked-blog-entries.php"; ?>
 
 
-      <!-- Sidebar Widgets Column -->
-      <?php require_once __DIR__ . "../../../includes/sidebar-widget.php"; ?>
+    
 
 
     </div>
