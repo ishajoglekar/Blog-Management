@@ -1,4 +1,5 @@
 var TableDatatables = function(){
+    
     var viewPostTable = function(){
         // alert(("hey"));
         var viewPosts = $("#manage-posts");

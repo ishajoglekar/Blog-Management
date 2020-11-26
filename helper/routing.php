@@ -522,17 +522,17 @@ if(isset($_POST['favs']))
             
             case DELETE_ERROR:
                 Session::setSession(DELETE_ERROR,"Update post Error");
-                Util::redirect("posts/blog-home.php");
+                Util::redirect("posts/liked-posts.php");
                 break;
             case DELETE_SUCCESS:
                 Session::setSession(DELETE_SUCCESS,"Update post Success");
-                Util::redirect("posts/blog-home.php");
+                Util::redirect("posts/liked-posts.php");
                 break;
         }
     }else{
         //errorpage 
         Session::setSession("csrf","CSRF ERROR");
-        Util::redirect("posts/blog-home.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
+        Util::redirect("posts/liked-posts.php");//Need to change this, actually we be redirecting to some error page indicating Unauthorized access.
 
     }
 }

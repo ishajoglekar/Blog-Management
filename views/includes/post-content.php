@@ -4,7 +4,7 @@ $post = $di->get('post')->getPostByID((int)$_GET['id'],PDO::FETCH_ASSOC);
 $category_name = $di->get('post')->getCategoryByID($post[0]['category_id'],PDO::FETCH_ASSOC);
 // Util::dd($post);
 ?>
-<div class="col-lg-8">
+<div class="col-lg-8" id="tp">
 
         <!-- Title -->
         <h1 class="mt-4"><?=$post[0]['name'];?> | <?=$category_name[0]['category_name']?> </h1>
@@ -90,3 +90,4 @@ $category_name = $di->get('post')->getCategoryByID($post[0]['category_id'],PDO::
         
 
       </div>
+

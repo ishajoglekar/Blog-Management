@@ -16,6 +16,13 @@ $page_title ="BLOG | BLOG POST";
 
 <body>
 
+<style>
+
+.disqus-footer__wrapper{
+  display:none!important;
+}
+</style>
+
   <!-- Navigation -->
   
   <?php require_once __DIR__."../../../includes/navbar.php";?>
@@ -46,7 +53,9 @@ $page_title ="BLOG | BLOG POST";
   <!-- Bootstrap core JavaScript -->
   <?php require_once __DIR__."../../../includes/core-scripts.php";?>
   <?php require_once __DIR__."../../../includes/page-level/manage-posts-scripts.php";?>
-
+  <script>
+    $('#footer').css('display','none');
+  </script>
 </body>
 
 </html>

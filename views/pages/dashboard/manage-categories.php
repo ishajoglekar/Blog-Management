@@ -57,10 +57,10 @@ $sidebarSubSection = "manage";
         <div class="container-fluid">
 
                 <!-- Page Heading -->
-                <h1 class="h3 mb-4 text-gray-800">Manage Users</h1>
+                <h1 class="h3 mb-4 text-gray-800">Manage Categories</h1>
                 <div class="card shadow mb-4">
                     <div class="card-header py-3">
-                        <h6 class="m-0 font-weight-bold text-primary ">Users</h6>
+                        <h6 class="m-0 font-weight-bold text-primary ">Categories</h6>
                     </div>
 
                     <div class="card-body">

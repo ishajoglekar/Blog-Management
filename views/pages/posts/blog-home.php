@@ -20,13 +20,12 @@ foreach ($favCat as $f) {
 <?php require_once __DIR__ . "../../../includes/head-section.php"; ?>
 
 <body>
-
   <!-- Navigation -->
   <?php require_once __DIR__ . "../../../includes/navbar.php"; ?>
 
 
   <!-- Page Content -->
-  <div class="container">
+  <div class="container-fluid">
 
     <div class="row">
 
@@ -35,7 +34,7 @@ foreach ($favCat as $f) {
 
 
       <!-- Sidebar Widgets Column -->
-      <?php require_once __DIR__ . "../../../includes/sidebar-widget.php"; ?>
+      
 
 
     </div>
@@ -65,7 +64,7 @@ foreach ($favCat as $f) {
           <div class="modal-body">
 
             <div class="form-group">
-            <input type="text"
+            <input type="hidden"
                               name="csrf_token"
                               value="<?= Session::getSession('csrf_token');?>">
               <?php
@@ -86,7 +85,7 @@ foreach ($favCat as $f) {
 
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="close">Close</button>
             <input type="submit" class="btn btn-primary" name="favs" value="Save changes">
           </div>
         </div>
@@ -97,7 +96,12 @@ foreach ($favCat as $f) {
   <script>
     window.onload = function() {
       document.getElementById('btn').click();
+      
     }
+
+    $('#close').click(function(){
+      $('#exampleModalCenter').fadeOut(); 
+    })
   </script>
 
   <!-- Footer -->

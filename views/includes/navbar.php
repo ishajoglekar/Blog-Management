@@ -38,7 +38,7 @@ color:#fff;
           
           <?php if($di->get('auth')->check()):?>
 
-            <li class="nav-item <?= $navSection=='likedposts' ? 'active' : '';?>">
+            <li class="nav-item <?= $navSection=='liked-posts' ? 'active' : '';?>">
             <a class="nav-link" href="<?=BASEPAGES?>posts/liked-posts.php">Liked Posts
               <span class="sr-only">(current)</span>
             </a>
